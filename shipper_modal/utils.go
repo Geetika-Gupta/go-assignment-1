@@ -3,6 +3,8 @@ package shipper_modal
 import (
 	"github.com/Geetika-Gupta/go-assignment-1/modal"
 	"github.com/gin-gonic/gin"
+	"strconv"
+	"net/http"
 )
 
 //Add new shipper.
@@ -10,8 +12,8 @@ func AddShipper() func(context *gin.Context) {
 	return func(context *gin.Context) {
 		var shipper modal.Shipper
 		var err error
-		if err = shipper.vAddShipper(context); err == nil {
-			err = shipper.pAddShipper()
+		if err = vAddShipper(context, &shipper); err == nil {
+			err = pAddShipper(&shipper)
 		}
 		buildResponse(nil, err, context)
 	}
@@ -37,10 +39,10 @@ func DeleteShipper() func(context *gin.Context) {
 //Update shipper details.
 func UpdateShipperDetails() func(context *gin.Context) {
 	return func(context *gin.Context) {
-		var shipper UpdateShipper
+		var shipper modal.UpdateShipper
 		var err error
-		if err = shipper.vUpdateShipperDetials(context); err == nil {
-			err = shipper.pUpdateShipperDetials(context)
+		if err = vUpdateShipperDetials(context, &shipper); err == nil {
+			err = pUpdateShipperDetials(&shipper)
 		}
 		buildResponse(nil, err, context)
 	}

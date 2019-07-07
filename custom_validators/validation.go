@@ -1,4 +1,4 @@
-package shipper_validator
+package custom_validators
 
 import (
 	"github.com/gin-gonic/gin/binding"

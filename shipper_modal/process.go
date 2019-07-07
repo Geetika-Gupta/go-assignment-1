@@ -31,7 +31,7 @@ func pDeleteShipper(id int) (error) {
 }
 
 //Process to update shipper details.
-func (shipper *modal.UpdateShipper) pUpdateShipperDetials(context *gin.Context) (error) {
+func pUpdateShipperDetials(shipper *modal.UpdateShipper) (error) {
 	refDb := db.Connect()
 	id,_ := strconv.Atoi(context.Param("id"))
 	var obj Shipper = Shipper{
