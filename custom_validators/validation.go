@@ -1,17 +1,20 @@
 package shipper_validator
 
 import (
+	"github.com/gin-gonic/gin/binding"
 	"gopkg.in/go-playground/validator.v8"
 	"reflect"
 	"strings"
 	"regexp"
 )
 
-//Register validations for shipper.
-func RegisterShipperValidations(v *validator.Validate) {
-	v.RegisterValidation("validname", validShipperName)
-	v.RegisterValidation("validpin", validPincode)
-	v.RegisterValidation("validtransportmode", validTransportMode)
+//Register custom validations.
+func RegisterValidations() {
+	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
+		v.RegisterValidation("validname", validShipperName)
+		v.RegisterValidation("validpin", validPincode)
+		v.RegisterValidation("validtransportmode", validTransportMode)
+	}
 }
 
 //Validation for shipper's name.

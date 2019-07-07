@@ -2,16 +2,16 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	shipperModel "project/model/shipper"
+	"github.com/Geetika-Gupta/go-assignment-1/shipper_modal"
 )
 
 //initialize endpoints.
 func InitializeRoutes(router *gin.Engine) {
 	shipper := router.Group("/shipper")
 	{
-		shipper.POST("/", shipperModel.AddShipper())
-		shipper.GET("/:name", shipperModel.GetShipper())
-		shipper.PUT("/:id", shipperModel.UpdateShipperDetails())
-		shipper.DELETE("/:id", shipperModel.DeleteShipper())
+		shipper.POST("/", shipper_modal.AddShipper())
+		shipper.GET("/:name", shipper_modal.GetShipper())
+		shipper.PUT("/:id", shipper_modal.UpdateShipperDetails())
+		shipper.DELETE("/:id", shipper_modal.DeleteShipper())
 	}
 }
