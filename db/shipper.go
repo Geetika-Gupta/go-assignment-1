@@ -6,7 +6,7 @@ import (
 	"github.com/go-pg/pg/orm"
 )
 
-//CreateShipper creates a table if not exists.
+//CreateShipper creates a table of model shipper if not exists.
 func CreateShipper() {
 	dbRef := migration.Connect()
 	ormOptions := &orm.CreateTableOptions{

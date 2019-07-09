@@ -13,7 +13,7 @@ func addShipper() func(context *gin.Context) {
 		var shipper Shipper
 		var err error
 		if err = vAddShipper(context, &shipper); err == nil {
-			err = pAddShipper(&shipper)
+			err = pAddShipper(shipper)
 		}
 		buildResponse(nil, err, context)
 	}
@@ -42,7 +42,7 @@ func updateShipperDetails() func(context *gin.Context) {
 		var shipper UpdateShipper
 		var err error
 		if err = vUpdateShipperDetials(context, &shipper); err == nil {
-			err = pUpdateShipperDetials(&shipper, context.Param("id"))
+			err = pUpdateShipperDetials(shipper, context.Param("id"))
 		}
 		buildResponse(nil, err, context)
 	}

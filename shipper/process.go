@@ -7,7 +7,7 @@ import (
 )
 
 //Process to add new shipper to database.
-func pAddShipper(shipper *Shipper) error {
+func pAddShipper(shipper Shipper) error {
 	refDb := migration.Connect()
 	err := refDb.Insert(shipper)
 	migration.Close(refDb)
@@ -32,19 +32,11 @@ func pDeleteShipper(id int) error {
 }
 
 //Process to update shipper details.
-func pUpdateShipperDetials(shipper *UpdateShipper, paramID string) error {
+func pUpdateShipperDetials(shipper UpdateShipper, paramID string) error {
 	refDb := migration.Connect()
 	id, _ := strconv.Atoi(paramID)
-	var obj = Shipper{
-		ID:                 id,
-		ShipperName:        shipper.ShipperName,
-		Address:            shipper.Address,
-		City:               shipper.City,
-		State:              shipper.State,
-		GSTIN:              shipper.GSTIN,
-		Pincode:            shipper.Pincode,
-		TransportationMode: shipper.TransportationMode,
-	}
+	var obj = Shipper(shipper)
+	obj.ID = id
 	_, err := refDb.Model(&obj).Where("id = ?id").UpdateNotNull()
 	migration.Close(refDb)
 	return err

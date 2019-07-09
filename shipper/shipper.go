@@ -14,6 +14,7 @@ type Shipper struct {
 
 //UpdateShipper defines the shiper modal in update view.
 type UpdateShipper struct {
+	ID                 int
 	ShipperName        string `json:"name" binding:"alphanum,max=255"`
 	Address            string `json:"address"`
 	TransportationMode string `json:"transportation_mode" binding:"validtransportmode"`

@@ -9,7 +9,7 @@ import (
 	"gopkg.in/go-playground/validator.v8"
 )
 
-//RegisterValidations adds the validation on shipper.
+//RegisterValidations add the custom validations.
 func RegisterValidations() {
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
 		v.RegisterValidation("validpin", validPincode)
