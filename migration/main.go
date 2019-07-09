@@ -1,16 +1,17 @@
-package db
+package migration
 
 import (
-	"github.com/go-pg/pg"
 	"fmt"
+
+	"github.com/go-pg/pg"
 )
 
-//Create database connection.
+//Connect creates a database connection.
 func Connect() *pg.DB {
 	opts := &pg.Options{
-		User: "postgres",
+		User:     "postgres",
 		Password: "postgres",
-		Addr: "localhost:5432",
+		Addr:     "localhost:5432",
 	}
 
 	db := pg.Connect(opts)

@@ -1,16 +1,16 @@
-package shipper_modal
+package shipper
 
 import (
-	"github.com/Geetika-Gupta/go-assignment-1/modal"
-	"github.com/gin-gonic/gin"
-	"strconv"
 	"net/http"
+	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 //Add new shipper.
-func AddShipper() func(context *gin.Context) {
+func addShipper() func(context *gin.Context) {
 	return func(context *gin.Context) {
-		var shipper modal.Shipper
+		var shipper Shipper
 		var err error
 		if err = vAddShipper(context, &shipper); err == nil {
 			err = pAddShipper(&shipper)
@@ -19,37 +19,37 @@ func AddShipper() func(context *gin.Context) {
 	}
 }
 
-//List Shipper
-func GetShipper() (func(context *gin.Context)) {
+//List Shipper.
+func getShipper() func(context *gin.Context) {
 	return func(context *gin.Context) {
 		res, err := pGetShipper(context.Param("name"))
 		buildResponse(res, err, context)
 	}
 }
 
-//Delete shipper
-func DeleteShipper() func(context *gin.Context) {
+//Delete shipper.
+func deleteShipper() func(context *gin.Context) {
 	return func(context *gin.Context) {
-		id,_ := strconv.Atoi(context.Param("id"))
+		id, _ := strconv.Atoi(context.Param("id"))
 		err := pDeleteShipper(id)
 		buildResponse(nil, err, context)
 	}
 }
 
 //Update shipper details.
-func UpdateShipperDetails() func(context *gin.Context) {
+func updateShipperDetails() func(context *gin.Context) {
 	return func(context *gin.Context) {
-		var shipper modal.UpdateShipper
+		var shipper UpdateShipper
 		var err error
 		if err = vUpdateShipperDetials(context, &shipper); err == nil {
-			err = pUpdateShipperDetials(&shipper)
+			err = pUpdateShipperDetials(&shipper, context.Param("id"))
 		}
 		buildResponse(nil, err, context)
 	}
 }
 
 //Response handler.
-func buildResponse(res []modal.Shipper, err error, context *gin.Context) {
+func buildResponse(res []Shipper, err error, context *gin.Context) {
 	var status int
 	if err == nil {
 		status = http.StatusOK
@@ -61,7 +61,7 @@ func buildResponse(res []modal.Shipper, err error, context *gin.Context) {
 		gin.H{
 			"status": status,
 			"result": res,
-			"error": err,
+			"error":  err,
 		},
 	)
 }
